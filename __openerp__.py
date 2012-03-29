@@ -32,7 +32,8 @@
     'depends': ['base'],
     'init_xml': [],
     'update_xml': [
-    	'wizard/dropbox_auth_app_view.xml'
+    	'wizard/dropbox_auth_app_view.xml',
+        'wizard/dropbox_attach_file.xml'
     ],
     'demo_xml': [],
     'test': [
