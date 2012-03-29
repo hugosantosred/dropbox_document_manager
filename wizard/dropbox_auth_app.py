@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from dropbox import client, rest, session
+from dropbox_document_manager.dropbox import client, rest, session
 from oauth import oauth
 
 from osv import osv, fields

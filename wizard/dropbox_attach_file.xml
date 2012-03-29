@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         <record id="wizard_dropbox_attach_file" model="ir.ui.view">
+            <field name="name">Dropbox Attach FIle</field>
+            <field name="model">dropbox.attach.file</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Dropbox Attach File">
+                    <field name="state" invisible="1"/>
+                    <group colspan="4" states="select_file">
+                        <label string="Select a File to send to dropbox"/>
+                        <newline/>
+                        <field name="name" invisible="1"/>
+                        <field name="file" filename="name"/>
+                        <newline/>
+                        <button type="object" name="dropbox_send_file"
+                            string="Send File" colspan="2"/>
+                    </group>
+                    <group colspan="4" states="send_file">
+                        <label string="Done"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="action_wizard_dropbox_attach_file" model="ir.actions.act_window">
+            <field name="name">Dropbox Attach file</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dropbox.attach.file</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>        
+        <menuitem action="action_wizard_dropbox_attach_file" id="menu_dropbox_attach" parent="dropbox_menu_parent"/>
+    </data>
+</openerp>
