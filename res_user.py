@@ -21,10 +21,12 @@
 from osv import osv, fields
 
 class res_users(osv.osv):
-	_inherit = 'res.users'
+    _inherit = 'res.users'
 
-	_columns = {
-		'dropbox_token': fields.char('Dropbox Token', size=255),
-		'dropbox_secret': fields.char('Dropbox Secret', size=255)
-	}
+    _columns = {
+        'dropbox_token': fields.char('Dropbox Token', size=255),
+        'dropbox_secret': fields.char('Dropbox Secret', size=255),
+        'dropbox_email': fields.char('Email', size=255),
+        'dropbox_quota': fields.float('Quota'),
+    }
 res_users()
