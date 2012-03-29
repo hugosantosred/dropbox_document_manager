@@ -11,7 +11,7 @@ initialization.
 import urllib
 import oauth.oauth as oauth
 
-from dropbox import rest
+from dropbox_document_manager.dropbox import rest
 
 class DropboxSession(object):
     API_VERSION = 1
