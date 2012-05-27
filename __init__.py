@@ -1,2 +1,3 @@
 import wizard
 import res_user
+import ir_attachment

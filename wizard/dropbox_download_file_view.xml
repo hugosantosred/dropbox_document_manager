@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="wizard_dropbox_download_file" model="ir.ui.view">
+            <field name="name">dropbox.download.file</field>
+            <field name="model">dropbox.download.file</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Download File from Dropbox">                    
+                    <group colspan="4">
+                        <field name="name" invisible="1"/>                       
+                        <field name="file" filename="name"/>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_dropbox_download_file" model="ir.actions.act_window">
+            <field name="name">Download file from dropbox</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dropbox.download.file</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>        
+    </data>
+</openerp>

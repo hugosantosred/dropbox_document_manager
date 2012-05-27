@@ -24,8 +24,8 @@ import base64
 
 from osv import osv, fields
 
-class dropbox_attach_file(osv.osv_memory):
-    _name = 'dropbox.attach.file'
+class dropbox_ir_attach(osv.osv_memory):
+    _name = 'dropbox.ir.attach'
 
     _columns = {
         'name': fields.char('File Name', size=64),
@@ -46,6 +46,8 @@ class dropbox_attach_file(osv.osv_memory):
         #Comprobamos que el usuario tiene Acceso a dropbox
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
 
+        active_id = context.get('active_id', False)
+
         if not user.dropbox_token or not user.dropbox_secret:
             raise osv.except_osv(_('Warning !'),"You can not upload files if you didn't give OpenERP\
  access to your dropbox account")
@@ -63,6 +65,9 @@ class dropbox_attach_file(osv.osv_memory):
     def dropbox_send_file(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
+        active_id = context.get('active_id', False)
+        ir_att = self.pool.get('ir.attachment').browse(cr, uid, active_id)
+        
         this = self.browse(cr, uid, ids)[0]
         attachment = this.file
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
@@ -70,10 +75,15 @@ class dropbox_attach_file(osv.osv_memory):
             sess = session.DropboxSession(config.APP_KEY, config.APP_SECRET, config.ACCESS_TYPE)
             sess.set_token(user.dropbox_token, user.dropbox_secret)
             dropbox_client = client.DropboxClient(sess)
-            dropbox_client.put_file('/%s' % this.name, base64.decodestring(attachment))
+            model_name = ir_att.res_model and ir_att.res_model.replace(".","_")
+            file_path = '/%s/%s/%s/%s' % (cr.dbname, model_name, ir_att.res_id, this.name)
+            resp = dropbox_client.put_file(file_path, base64.decodestring(attachment))
+            self.pool.get('ir.attachment').write(cr, uid, ir_att.id, {'dropbox_path': resp['path'], 'dropbox_rev': resp['rev']})
+            sess.unlink()
+
         except rest.ErrorResponse as http_resp:
                 raise osv.except_osv(_('Error !'),"%s" % http_resp)
 
-        return self.write(cr, uid, ids, {'state': 'send_file'})
+        return {'type': 'ir.actions.act_window_close'}
 
-dropbox_attach_file()
+dropbox_ir_attach()

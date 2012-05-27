@@ -20,13 +20,15 @@
 ##############################################################################
 from osv import osv, fields
 
-class res_users(osv.osv):
-    _inherit = 'res.users'
+class ir_attachment(osv.osv):
+	_inherit = 'ir.attachment'
 
-    _columns = {
-        'dropbox_token': fields.char('Dropbox Token', size=255),
-        'dropbox_secret': fields.char('Dropbox Secret', size=255),
-        'dropbox_email': fields.char('Email', size=255),
-        'dropbox_quota': fields.float('Quota'),
-    }
-res_users()
+	_columns = {
+		'type': fields.selection(
+                [ ('url','URL'), ('binary','Binary'), ('dropbox', 'Dropbox')],
+                'Type', help="Binary File or external URL", required=True, change_default=True),
+        'dropbox_path': fields.char('File', size=255, readonly=True),
+        'dropbox_rev': fields.char('Revision', size=64, readonly=True),
+	}
+
+ir_attachment()

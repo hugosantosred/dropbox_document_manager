@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012 (<hugosantosred@gmail.com>).
+#    Copyright (C) 2012 Hugo Santos Redondo (<hugosantosred@gmail.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -26,14 +26,17 @@
     'complexity': "easy",
     'description': """Dropbox Document Manager
     """,
-    'author': 'Hugo Santos Redondo',
+    'author': 'Factor Libre',
     'website': '',
     'images': [],
     'depends': ['base'],
     'init_xml': [],
     'update_xml': [
-    	'wizard/dropbox_auth_app_view.xml',
-        'wizard/dropbox_attach_file.xml'
+        'wizard/dropbox_auth_app_view.xml',
+        'wizard/dropbox_attach_file.xml',
+        'wizard/dropbox_ir_attach.xml',
+        'wizard/dropbox_download_file_view.xml',
+        'ir_attachment_view.xml',
     ],
     'demo_xml': [],
     'test': [

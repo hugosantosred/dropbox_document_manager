@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-    	 <record id="wizard_dropbox_auth_app" model="ir.ui.view">
+         <record id="wizard_dropbox_auth_app" model="ir.ui.view">
             <field name="name">Dropbox Auth app</field>
             <field name="model">dropbox.auth.app</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Dropbox Auth App">
-                	<field name="state" invisible="1"/>
-                	<group colspan="4" states="start">
-                		<label string="Press Accept to Authenticate with your Dropbox Account"/>
-                		<button icon="gtk-ok" name="generate_auth_url" string="_Accept" type="object"/>
-                	</group>
+                    <field name="state" invisible="1"/>
+                    <group colspan="4" states="start">
+                        <label string="Press Accept to Authenticate with your Dropbox Account"/>
+                        <button icon="gtk-ok" name="generate_auth_url" string="_Accept" type="object"/>
+                    </group>
                     <group colspan="4" states="confirm">
-                    	<field name="auth_url" widget="url" colspan="4"/>
-                    	<button icon="gtk-ok" name="set_token_to_user" string="_Accept" type="object"/>
-                   	</group>
-                   	<group colspan="4" states="done">
-                   		<label string="Succesfully authenticated with dropbox"/>
-                   	</group>
+                        <field name="auth_url" widget="url" colspan="4"/>
+                        <button icon="gtk-ok" name="set_token_to_user" string="_Accept" type="object"/>
+                    </group>
+                    <group colspan="4" states="done">
+                        <label string="Succesfully authenticated with dropbox"/>
+                    </group>
                 </form>
             </field>
         </record>
